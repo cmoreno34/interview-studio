@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interview studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Archivo:wght@400;500;600;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root{
+  --ground:#f4f2ea;--panel:#fbfaf5;--ink:#17251d;--soft:#4a5a50;--leaf:#2f6b4f;--leaf-ink:#21503b;
+  --clay:#bd5f3f;--line:#ddd8c9;--sage:#e7ece3;--chip:#eef1e8;--shadow:0 1px 2px rgba(23,37,29,.06),0 8px 24px rgba(23,37,29,.06);
+  --c1:#3b6fb5;--c2:#2f8f8f;--c3:#c9702f;--c4:#7a6bd0;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#111713;--panel:#18211b;--ink:#eef1ea;--soft:#a7b7ac;--leaf:#6bbd93;--leaf-ink:#8fd3ac;
+  --clay:#e08a68;--line:#2a352d;--sage:#1e2922;--chip:#212c25;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35);
+  --c1:#6ea8e6;--c2:#63c6c6;--c3:#e0a44f;--c4:#b0a6d6;}}
+:root[data-theme="dark"]{
+  --ground:#111713;--panel:#18211b;--ink:#eef1ea;--soft:#a7b7ac;--leaf:#6bbd93;--leaf-ink:#8fd3ac;
+  --clay:#e08a68;--line:#2a352d;--sage:#1e2922;--chip:#212c25;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px rgba(0,0,0,.35);
+  --c1:#6ea8e6;--c2:#63c6c6;--c3:#e0a44f;--c4:#b0a6d6;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:Archivo,system-ui,sans-serif;line-height:1.55;padding-inline:clamp(16px,4vw,40px)}
+.wrap{max-width:820px;margin:0 auto}
+header{padding-block:30px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.brandline{font:600 12px/1 Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf);margin:0 0 8px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:900;font-size:clamp(26px,5vw,36px);line-height:1.04;margin:0}
+.themebtn{background:var(--panel);border:1px solid var(--line);color:var(--soft);border-radius:999px;padding:6px 13px;font:500 13px Archivo;cursor:pointer}
+.sub{font-size:14px;color:var(--soft);margin:16px 0 4px}
+.case{background:var(--sage);border:1px solid var(--line);border-radius:14px;padding:15px 18px;margin:14px 0 6px;font-size:14.5px}
+.case b{font-weight:700}.case .q{color:var(--clay);font-weight:700}
+.case details{margin-top:8px}.case summary{cursor:pointer;font:600 12.5px Archivo;color:var(--leaf-ink)}
+.who{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 4px}
+.who label{display:flex;flex-direction:column;gap:4px;font:700 10.5px Archivo;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.who input{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:400 14px Archivo;background:var(--panel);color:var(--ink);min-width:200px}
+.step{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--c,var(--leaf));border-radius:12px;padding:16px 18px;margin:15px 0;box-shadow:var(--shadow)}
+.step h2{font-family:Fraunces,serif;font-weight:900;font-size:19px;margin:0 0 3px;display:flex;align-items:center;gap:10px}
+.step h2 .n{background:var(--c,var(--leaf));color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.step .lead{color:var(--soft);font-size:13px;margin:0 0 12px}
+label.fl{display:block;font:700 11px Archivo;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 6px}
+input.txt,textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--ground);color:var(--ink);padding:11px 13px;font:400 14px/1.5 Archivo;resize:none}
+textarea{overflow:hidden;min-height:60px}
+textarea.capped{overflow:auto;resize:vertical}
+input.txt:focus,textarea:focus{outline:none;border-color:var(--c,var(--leaf))}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.btn{background:var(--leaf);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:700 14px Archivo;cursor:pointer}
+.how{background:var(--sage);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:4px 0 12px;font-size:13px}
+.how ol,.how ul{margin:6px 0 0;padding-left:20px}.how li{margin:4px 0}.how b{color:var(--leaf-ink)}
+.icard{border:1px solid var(--line);border-radius:11px;background:var(--ground);padding:11px 13px;margin:10px 0}
+.icard .ih{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.icard .ih b{font:700 13px Archivo;color:var(--c1)}
+.icard .rm{background:none;border:0;color:var(--soft);cursor:pointer;font:600 12px Archivo}
+.icard input.txt{padding:8px 11px;font-size:13.5px;margin-bottom:6px;background:var(--panel)}
+.icard textarea{background:var(--panel)}
+.chip2{display:flex;align-items:center;gap:10px;justify-content:space-between;border:1px solid var(--line);background:var(--sage);border-radius:10px;padding:11px 14px;font:600 13.5px Archivo;cursor:pointer;margin:2px 0}
+.chip2 b{color:var(--leaf-ink)}.chip2 .edit{font:600 12px Archivo;color:var(--soft);white-space:nowrap}.chip2:hover{border-color:var(--leaf)}
+.copybtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:8px 13px;font:600 12.5px Archivo;cursor:pointer;margin-bottom:10px}
+.copybtn:hover{border-color:var(--leaf)}
+pre.prompt{background:#14211b;color:#e8efe6;border-radius:10px;padding:14px;margin:0 0 10px;font:400 12px/1.6 ui-monospace,monospace;white-space:pre-wrap;max-height:340px;overflow:auto}
+.maplabel{font:700 11px Archivo;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:12px 0 2px}
+.mapout{margin:4px 0 2px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:auto;text-align:center}
+.mapout svg{max-width:100%;height:auto}
+.mapmsg{font-size:12.5px;color:var(--soft);margin:2px 0 8px}
+.tools2{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.t2{display:flex;flex-direction:column;gap:1px;background:var(--ground);border:1px solid var(--line);border-radius:9px;padding:8px 12px;text-decoration:none;color:var(--ink);font:700 13px Archivo}
+.t2 span{font:500 10.5px Archivo;color:var(--soft)}.t2.main{background:var(--c,var(--leaf));color:#fff;border-color:transparent}.t2.main span{color:rgba(255,255,255,.82)}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 6px}
+.pdf{background:var(--clay);color:#fff;border:0;border-radius:10px;padding:13px 24px;font:700 15px Archivo;cursor:pointer}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--soft);border-radius:10px;padding:12px 16px;font:600 13px Archivo;cursor:pointer}
+.saved{font-size:12px;color:var(--soft)}.hint{font-size:12.5px;color:var(--clay);margin:4px 0 0}.count{font:700 12.5px Archivo;color:var(--leaf);margin-top:6px;min-height:16px}
+.printonly{display:none}.printmirror{display:none}
+@media print{
+  header .themebtn,.tools2,.copybtn,pre.prompt,.step .lead,.bar,.how,.btn,.chip2,.count,.mapmsg,.rm,.case details{display:none!important}
+  body{background:#fff;color:#000;padding:0}.step{border:1px solid #bbb;border-left:5px solid #666;break-inside:avoid;box-shadow:none}
+  textarea,input.txt{border-color:#bbb;background:#fff;color:#000}
+  .icard textarea,#w_airesult{display:none!important}
+  .printmirror{display:block;white-space:pre-wrap;word-break:break-word;font:11px/1.5 Archivo;border:1px solid #bbb;border-radius:8px;padding:10px;background:#fff;margin:2px 0 8px}
+  .printmirror:empty{display:none}.mapout{display:block!important;border:1px solid #bbb}
+  .printonly{display:block;margin-bottom:10px;border-bottom:2px solid #2f6b4f;padding-bottom:6px}
+}
+</style></head>
+<body><div class="wrap">
+<header>
+  <div><p class="brandline">Estudios de Mercado I · Tema 3 · In-depth interviews (3.2)</p>
+  <h1>Interview studio</h1></div>
+  <button class="themebtn" id="theme">◐ Theme</button>
+</header>
+<div class="printonly"><div style="font:700 11px Archivo;letter-spacing:.1em;text-transform:uppercase;color:#2f6b4f">Estudios de Mercado I · Tema 3 — In-depth interview worksheet</div></div>
+
+<p class="sub"><b>What you do:</b> run <b>3–5 short in-depth interviews</b> on ONE topic — one respondent, one interviewer, a semi-structured guide — <b>record</b> them, get them <b>transcribed</b>, then apply <b>thematic analysis across the interviews</b> and <b>laddering</b> (attribute → consequence → value) to reach a decision for the client.</p>
+
+<div class="case" id="topic">
+  <b>The topic — <span id="topicShow">the student night out</span>.</b> Client: <span id="clientShow">a new events / nightlife app that wants to win the student segment</span>.
+  <span class="q">Research question:</span> <span id="rqShow">how do students decide where to go out — music, venue, people, budget — and what makes a night feel “worth it”?</span>
+  <details><summary>▸ Change the topic (keep it the same as your focus group if you will triangulate)</summary>
+    <label class="fl" for="w_topic" style="margin-top:8px">Topic</label><input class="txt" id="w_topic">
+    <label class="fl" for="w_client">Client</label><input class="txt" id="w_client">
+    <label class="fl" for="w_rq">Research question</label><input class="txt" id="w_rq">
+  </details>
+</div>
+
+<div class="how">
+  <b>Interviewer's guide — a funnel, ~15–20 min per interview (3.2).</b> Semi-structured: cover the topics, but follow whatever is interesting.
+  <ol>
+    <li><b>Warm-up (2m):</b> “Tell me a bit about a normal week for you.” (no wrong answers)</li>
+    <li><b>Broad context (4m):</b> “Walk me through the last time you went out — from deciding to getting home.” Let them frame it in their words.</li>
+    <li><b>Core (6m):</b> “How did you choose where to go? What made it worth it — or not? If you had to give up the music, the place, the people or the price, which goes first?”</li>
+    <li><b>Deep probes / ladder (5m):</b> take <b>two or three</b> things they named and climb: “why does that matter to you?” → “and what does that give you?” → until you reach a value. Ask for a critical incident: “tell me about a night that went wrong”.</li>
+    <li><b>Close (1m):</b> “What haven't I asked that matters?”</li>
+  </ol>
+  <b>The three habits that ruin an interview:</b> asking two questions at once · filling the silence (count to three) · accepting the first answer.
+  <br><b>Who:</b> choose on purpose (purposive) — e.g. someone who goes out every week, someone who rarely does, someone new to the city. Stop adding interviews when the last one tells you nothing new (<b>saturation</b>).
+</div>
+
+<div class="who">
+  <label>Name / group <input id="w_name" placeholder="Group 2 — A. García"></label>
+  <label>Date <input id="w_date" placeholder="dd/mm/yyyy"></label>
+</div>
+
+<div class="step" style="--c:var(--c1)">
+  <h2><span class="n">1</span> Paste the transcript of each interview</h2>
+  <p class="lead">One card per interview. Add a one-line <b>anonymised profile</b> (no names) and the transcript. Each box collapses to a tidy line so the worksheet stays in view.</p>
+  <div class="how" style="background:var(--panel)">
+    <b>Get each transcript — upload the recording to Claude, Gemini or ChatGPT</b>
+    <ol>
+      <li>Open one of the chats below and start a <b>new conversation</b> for each recording.</li>
+      <li><b>Attach the recording</b> (mp4 · m4a · mp3 · wav) with the paperclip / <b>+</b> button.</li>
+      <li>Copy the <b>transcription prompt</b> below, paste it in the same message and send.</li>
+      <li>Copy the transcript it returns and <b>paste it in that interview's card</b>. Read it once and fix obvious mistakes.</li>
+    </ol>
+    <div class="tools2">
+      <a class="t2 main" style="--c:var(--c1)" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini<span>best with long audio / video</span></a>
+      <a class="t2" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT<span>chatgpt.com</span></a>
+      <a class="t2" href="https://claude.ai/new" target="_blank" rel="noopener">Claude<span>claude.ai</span></a>
+    </div>
+    <button class="copybtn" id="copytxprompt">copy the transcription prompt</button>
+    <pre class="prompt" id="txprompt"></pre>
+  </div>
+  <div id="cards"></div>
+  <div class="row"><button class="copybtn" id="addIv" style="margin:0">+ Add an interview</button><span class="count" id="count" style="flex:1;margin:0"></span></div>
+</div>
+
+<div class="step" style="--c:var(--c2)">
+  <h2><span class="n">2</span> Analyse them — apply the method</h2>
+  <p class="lead">You are applying <b>thematic analysis</b> (3.7) across the interviews and <b>laddering</b> (3.2) inside each one.</p>
+  <div class="how">
+    <b>The method you apply to the transcripts:</b>
+    <ol>
+      <li><b>Familiarise</b> — read each interview once; you should be able to summarise it from memory.</li>
+      <li><b>Open-code each interview</b> — tag recurring ideas in the respondent's own words.</li>
+      <li><b>Compare across interviews → themes</b> — a theme is shared by <b>at least two respondents</b>, with two real quotes. Look for the respondent who contradicts it.</li>
+      <li><b>Ladder</b> — climb from what they said (attribute) to why it matters (consequence) to what it serves (value).</li>
+      <li><b>Map & check</b> — the thematic map, the ladder map, and saturation: did the last interview add anything new?</li>
+    </ol>
+    The prompt below runs a first pass (AI = second coder). You judge, verify and decide.
+  </div>
+  <div class="tools2">
+    <a class="t2 main" href="https://claude.ai/new" target="_blank" rel="noopener">Claude<span>draws the maps reliably</span></a>
+    <a class="t2" href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT<span>chatgpt.com</span></a>
+    <a class="t2" href="https://gemini.google.com/app" target="_blank" rel="noopener">Gemini<span>gemini.google.com</span></a>
+  </div>
+  <div class="how" style="background:var(--panel)">
+    <b>The maps are the point — get them back as code:</b>
+    <ol>
+      <li>Paste the prompt into a <b>new chat</b>. The answer must <b>start with two <code>```mermaid</code> code blocks</b>: the thematic map and the ladder map.</li>
+      <li>Copy the answer with the chat's own <b>Copy</b> button under the reply — it keeps the code blocks intact. Selecting the text with the mouse can lose them.</li>
+      <li>Map missing? Reply: <b>“You did not include the maps. Output the thematic map (mindmap) and the ladder map (flowchart BT) now as ```mermaid code blocks, as plain text.”</b></li>
+      <li>It showed a picture instead of code? Reply: <b>“Don't draw it. Give me the Mermaid code as plain text in a ```mermaid code block.”</b></li>
+    </ol>
+  </div>
+  <button class="copybtn" id="copyprompt">copy the analysis prompt (with all the interviews)</button>
+  <pre class="prompt" id="prompt"></pre>
+  <label class="fl" for="w_airesult">Paste the AI's full answer back here — including both <code>```mermaid</code> blocks</label>
+  <textarea id="w_airesult" class="capped" style="height:150px;max-height:260px" placeholder="Paste everything the AI returned: codes, themes with quotes, the theme × interview matrix, the ladders and both ```mermaid ... ``` maps. Then press ‘Draw the maps’. It collapses once you click away."></textarea>
+  <div class="chip2" id="aiChip" style="display:none"><span>✓ AI answer pasted — maps drawn below</span><span class="edit">click to view / edit</span></div>
+  <pre class="printmirror" id="aiPrint"></pre>
+  <div class="row"><button class="copybtn" id="drawmap" style="margin:0">◇ Draw the maps</button></div>
+  <p class="mapmsg" id="mapmsg"></p>
+  <div id="maps"></div>
+  <label class="fl" for="w_themes">Your read of the AI's analysis — which themes hold up, which you cut, and why</label>
+  <textarea id="w_themes" placeholder="Theme 1 holds — I1 and I3 both say it: “…”, “…”. Theme 2 I cut — only I2 said it. The ladder from ‘cheap entry’ really ends in ‘not being left out’, not in ‘saving money’. (You are the analyst; the AI was the first-pass second coder.)"></textarea>
+  <label class="fl" for="w_ladder">The ladder that matters most — attribute → consequence → value</label>
+  <textarea id="w_ladder" placeholder="e.g. Free entry before 1 am → we can all go together → nobody gets left out → belonging."></textarea>
+</div>
+
+<div class="step" style="--c:var(--c3)">
+  <h2><span class="n">3</span> Interviewer effect and saturation, then the decision <b>for the client</b></h2>
+  <p class="lead">An interview is a conversation you steered. Name where you led, where they told you what sounds good, and whether you had heard enough — then say what the <b>client should DO</b>. The decision is a marketing action, not a summary.</p>
+  <label class="fl" for="w_bias">Where the interviewer or the setting may have shaped the answers</label>
+  <textarea id="w_bias" placeholder="e.g. In I2 I suggested ‘price’ before she mentioned it; I accepted ‘the vibe’ without probing; all respondents are classmates, so they may play down how much they spend."></textarea>
+  <label class="fl" for="w_sat">Saturation — did the last interview add anything new?</label>
+  <textarea id="w_sat" placeholder="e.g. I4 repeated themes 1–3 and added nothing new except a single comment on safety going home → close to saturation on the main themes, not on safety."></textarea>
+  <label class="fl" for="w_dec">The decision FOR THE CLIENT — what should the app DO? + the question interviews can't answer</label>
+  <textarea id="w_dec" style="min-height:96px" placeholder="Decision (an action, briefed on the value, not the attribute): e.g. “Build group plans that make it easy for the whole group to go together, and market belonging, not discounts.” Then the limit: “Five interviews can't tell us how many students feel this — that needs a survey.”"></textarea>
+</div>
+
+<div class="bar">
+  <button class="pdf" id="pdf">⬇ Download PDF</button>
+  <button class="ghost" id="clear">Clear worksheet</button>
+  <span class="saved" id="saved">Saved in this browser</span>
+</div>
+<p class="hint">One set of interviews = one PDF. <b>Download before clearing.</b> Ask for consent before recording, anonymise respondents, and remember: interviews tell you what exists and why it matters, never how common it is — that is a survey's job.</p>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const KEY='mkt3600_idi';
+const DEF={w_topic:'the student night out',w_client:'a new events / nightlife app that wants to win the student segment',
+  w_rq:'how do students decide where to go out — music, venue, people, budget — and what makes a night feel “worth it”?'};
+function val(id){const e=$('#'+id);return e?e.value.trim():'';}
+function autogrow(t){t.style.height='auto';t.style.height=(t.scrollHeight+2)+'px';}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function lines(s){return s?s.split('\n').filter(x=>x.trim()).length:0;}
+
+/* ---- interviews (one card each) ---- */
+let ivs=[{who:'',tx:''},{who:'',tx:''},{who:'',tx:''}];
+function renderCards(){
+  const box=$('#cards');box.innerHTML='';
+  ivs.forEach((iv,k)=>{
+    const d=document.createElement('div');d.className='icard';
+    d.innerHTML=`<div class="ih"><b>Interview I${k+1}</b>${ivs.length>1?`<button class="rm" title="Remove this interview">✕ remove</button>`:''}</div>
+      <input class="txt who" placeholder="Anonymised profile — e.g. 20, 2nd year, goes out every week, lives in a shared flat" value="${esc(iv.who)}">
+      <textarea class="capped tx" style="height:120px;max-height:240px" placeholder="Paste the transcript of I${k+1}. Speaker labels help (I: interviewer, R: respondent) but a rough paste is fine.">${esc(iv.tx)}</textarea>
+      <div class="chip2" style="display:none"><span>✓ I${k+1} transcript — <b class="nl"></b> lines</span><span class="edit">click to view / edit</span></div>
+      <pre class="printmirror"></pre>`;
+    const who=d.querySelector('.who'),ta=d.querySelector('.tx'),chip=d.querySelector('.chip2');
+    who.oninput=()=>{iv.who=who.value;changed();};
+    ta.oninput=()=>{iv.tx=ta.value;changed();};
+    const col=()=>{if(!ta.value.trim())return;ta.style.display='none';chip.style.display='';chip.querySelector('.nl').textContent=lines(ta.value);};
+    ta.addEventListener('blur',col);
+    chip.onclick=()=>{ta.style.display='';chip.style.display='none';ta.focus();};
+    const rm=d.querySelector('.rm');
+    if(rm)rm.onclick=()=>{if(iv.tx.trim()&&!confirm(`Remove interview I${k+1} and its transcript?`))return;ivs.splice(k,1);renderCards();changed();};
+    box.appendChild(d);col();
+  });
+}
+$('#addIv').onclick=()=>{if(ivs.length>=8)return;ivs.push({who:'',tx:''});renderCards();changed();
+  const t=[...document.querySelectorAll('#cards .icard')].pop();if(t)t.querySelector('.who').focus();};
+function filled(){return ivs.map((iv,k)=>({...iv,label:'I'+(k+1)})).filter(iv=>iv.tx.trim());}
+function refreshCount(){const f=filled();const n=f.reduce((a,iv)=>a+lines(iv.tx),0);
+  $('#count').textContent=f.length?`${f.length} interview${f.length>1?'s':''} · ${n} lines pasted${f.length<3?' — aim for at least 3':''}`:'';
+  $('#addIv').style.display=ivs.length>=8?'none':'';}
+
+function topic(){return val('w_topic')||DEF.w_topic;}
+function client(){return val('w_client')||DEF.w_client;}
+function rq(){return val('w_rq')||DEF.w_rq;}
+function refreshTopic(){$('#topicShow').textContent=topic();$('#clientShow').textContent=client();$('#rqShow').textContent=rq();}
+
+function buildPrompt(){
+  const f=filled();
+  const body=f.length?f.map(iv=>`INTERVIEW ${iv.label} — profile: ${iv.who.trim()||'not given'}
+"""
+${iv.tx.trim()}
+"""`).join('\n\n'):'[PASTE AT LEAST ONE TRANSCRIPT FIRST]';
+  const labs=f.length?f.map(iv=>iv.label).join(', '):'I1, I2, …';
+  return `Act as a qualitative research analyst. Below are the transcripts of ${f.length||'several'} semi-structured IN-DEPTH INTERVIEWS (one respondent, one interviewer) on ${topic()}. The client is ${client()}. Research question: ${rq()}
+The interviews are labelled ${labs}, each with a short anonymised profile.
+
+${body}
+
+HOW YOUR ANSWER WILL BE USED — READ THIS FIRST. I will copy your whole answer and paste it into a web tool that DRAWS the maps from your Mermaid code. The two maps are THE MOST IMPORTANT PART of the answer; an answer without them is useless to me and will be rejected. So:
+- BEGIN your reply with the TWO map code blocks (A and B below) — before any heading, introduction or other text.
+- Each map goes in its OWN fenced code block: a line with \`\`\`mermaid, then the code, then a line with \`\`\` alone.
+- Write the code as PLAIN TEXT. Do NOT render, preview or draw the diagram; do NOT generate an image; do NOT use canvas, artifacts or any other tool; do NOT describe the map in words instead; do NOT say you cannot draw; do NOT ask whether I want it; do NOT postpone it.
+- Keep the code valid: plain words only inside the nodes — NO quotation marks, apostrophes, parentheses, brackets, braces, colons, semicolons, ampersands, hashes or emojis inside node text. Short nodes (a quote leaf at most 8 words).
+
+A) THEMATIC MAP — a Mermaid "mindmap":
+   - first line: mindmap
+   - second line: the root, written as  root((Topic))
+   - then themes, then categories, then ONE short sample quote per category — one node per line, nested ONLY by indentation (2 spaces per level)
+   Exact format:
+\`\`\`mermaid
+mindmap
+  root((Night out))
+    Belonging
+      Going as a group
+        If my friends are not going I stay home
+    Price
+      Cheap entry
+        Free before 1 am is why we go
+\`\`\`
+B) LADDER MAP — a hierarchical value map as a SECOND, separate Mermaid code block of type "flowchart BT" (attributes at the bottom, values at the top). Merge identical rungs from different respondents into one node. Node ids are short letters plus numbers (A1 attributes, C1 consequences, V1 values); labels go in square brackets in plain words. One link per line. Exact format:
+\`\`\`mermaid
+flowchart BT
+  A1[Free entry before 1 am] --> C1[The whole group can go]
+  C1 --> P1[Nobody is left out]
+  P1 --> V1[Belonging]
+\`\`\`
+
+AFTER the two maps, do the analysis — ALL 6 steps, in order:
+1) OPEN-CODE each interview separately, in the respondent's own words (a short code list per interview).
+2) THEMES ACROSS THE INTERVIEWS: name 3-5 themes. A theme must be shared by AT LEAST TWO respondents — one memorable person is not a theme. Give each theme TWO real verbatim quotes, each tagged with its interview (e.g. I2). Copy them exactly; never invent.
+3) THEME x INTERVIEW MATRIX: a table with one row per theme and one column per interview (${labs}), marking Y present, ~ hinted, - absent. Then name any respondent who CONTRADICTS a theme (disconfirming cases).
+4) LADDERS (means-end chains): for each interview, find 1-3 ladders actually present in the transcript, written as  Attribute > Functional consequence > Psychosocial consequence > Value. If the respondent never reached a rung, write "not reached" — do not fill it in yourself. Say where the interviewer stopped climbing too early.
+5) SATURATION & INTERVIEWER EFFECT: did the last interview(s) add new codes or only repeat earlier ones? Where did the interviewer lead, ask two questions at once, fill a silence or accept the first answer? Where may a respondent be giving the socially desirable answer?
+6) End with the single DECISION the client should take (a concrete marketing action), what the ladders change about it (a brief written on the attribute versus one written on the value), and the biggest question interviews CANNOT answer (how common it is — that needs a survey).
+The maps must match the themes and ladders of your analysis. Use ONLY the transcripts — do not invent quotes or data; if the evidence is thin, say so.
+
+FINAL CHECK before you send: does your reply BEGIN with the \`\`\`mermaid mindmap block, followed by the \`\`\`mermaid flowchart BT block, both as plain-text code? If not, fix it before answering.`;
+}
+const TX_PROMPT=`Transcribe the attached interview recording word for word, in the language it was spoken (do not translate).
+- Label the speakers: I: for the interviewer and R: for the respondent.
+- Start a new line every time the speaker changes.
+- Do not summarise, shorten, correct or clean up what people say. Keep hesitations and pauses as [pause].
+- Write [inaudible] where you cannot make it out. Do not guess.
+- Return ONLY the transcript as plain text — no introduction, no summary, no analysis.`;
+function refreshPrompt(){$('#prompt').textContent=buildPrompt();}
+$('#txprompt').textContent=TX_PROMPT;
+
+/* ---- save / restore ---- */
+const ids=['w_name','w_date','w_topic','w_client','w_rq','w_airesult','w_themes','w_ladder','w_bias','w_sat','w_dec'];
+let st;
+function save(){clearTimeout(st);st=setTimeout(()=>{const o={};ids.forEach(i=>o[i]=val(i));o._ivs=ivs;
+  try{localStorage.setItem(KEY,JSON.stringify(o));$('#saved').textContent='Saved ✓ '+new Date().toLocaleTimeString();}catch(_){}} ,300);}
+function changed(){save();refreshPrompt();refreshCount();}
+(function init(){let s={};try{s=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(_){}
+  if(Array.isArray(s._ivs)&&s._ivs.length)ivs=s._ivs.map(x=>({who:String(x.who||''),tx:String(x.tx||'')}));
+  ids.forEach(i=>{const el=$('#'+i);if(!el)return;el.value=s[i]||DEF[i]||'';
+    const capped=el.classList.contains('capped');
+    el.addEventListener('input',()=>{if(el.tagName==='TEXTAREA'&&!capped){autogrow(el);}save();if(i in DEF){refreshTopic();refreshPrompt();}});
+    if(el.tagName==='TEXTAREA'&&!capped)autogrow(el);});
+  renderCards();refreshTopic();refreshPrompt();refreshCount();
+  if(val('w_airesult'))collapse('w_airesult','aiChip');
+})();
+
+/* collapse the AI answer box */
+function collapse(taId,chipId){const t=$('#'+taId);if(!t.value.trim())return;t.style.display='none';$('#'+chipId).style.display='';}
+function expand(taId,chipId){$('#'+taId).style.display='';$('#'+chipId).style.display='none';$('#'+taId).focus();}
+$('#w_airesult').addEventListener('blur',()=>collapse('w_airesult','aiChip'));
+$('#aiChip').onclick=()=>expand('w_airesult','aiChip');
+
+/* ---- draw both maps ---- */
+try{mermaid.initialize({startOnLoad:false,securityLevel:'loose',theme:'neutral'});}catch(_){}
+function extractAll(t){t=t.replace(/\r/g,'');const ok=c=>/^(mindmap|graph|flowchart)\b/i.test(c);
+  const bl=[...t.matchAll(/(^|\n)[ \t]*```[ \t]*mermaid[ \t]*\n([\s\S]*?)\n[ \t]*```/gi)].map(x=>x[2].trim()).filter(ok);if(bl.length)return bl;
+  return bareBlocks(t);}
+/* no fences (copied from the rendered page): take each bare "mindmap" / "flowchart" block up to the next unindented prose line */
+function bareBlocks(t){const out=[],L=t.split('\n');const head=/^[ \t]*(mindmap|graph\s+(TD|LR|TB|BT)|flowchart\s+(TD|LR|TB|BT))\b/i;
+  for(let k=0;k<L.length;k++){if(!head.test(L[k]))continue;const b=[L[k].trim()];let j=k+1;
+    for(;j<L.length;j++){const x=L[j];if(/^[ \t]*```/.test(x)||head.test(x))break;if(!x.trim())continue;
+      if(/^\S/.test(x)&&!/-->|^\w+[\[(]/.test(x))break;b.push(x.replace(/\s+$/,''));}
+    if(b.length>1)out.push(b.join('\n'));k=j-1;}
+  return out;}
+$('#drawmap').onclick=async()=>{
+  const codes=extractAll(val('w_airesult'));const box=$('#maps'),msg=$('#mapmsg');box.innerHTML='';
+  if(!codes.length){msg.textContent='No map found. Reply to the AI: “You did not include the maps. Output the thematic map (mindmap) and the ladder map (flowchart BT) now as ```mermaid code blocks.” Paste them here and press Draw the maps again.';return;}
+  const mind=codes.filter(c=>/^mindmap/i.test(c)).pop(), flow=codes.filter(c=>!/^mindmap/i.test(c)).pop();
+  const notes=[];
+  for(const [code,label] of [[mind,'Thematic map'],[flow,'Ladder map — attributes → consequences → values']]){
+    if(!code){notes.push(label.split(' —')[0]+' missing — ask the AI for it.');continue;}
+    const l=document.createElement('div');l.className='maplabel';l.textContent=label;
+    const o=document.createElement('div');o.className='mapout';
+    try{const {svg}=await mermaid.render('mmap_'+Date.now()+Math.random().toString(36).slice(2,6),code);o.innerHTML=svg;box.append(l,o);}
+    catch(e){notes.push(`Could not draw the ${label.split(' —')[0].toLowerCase()} — ask the AI: “return it again as valid Mermaid”, then paste and retry.`);}
+  }
+  msg.textContent=notes.join(' ');
+};
+
+/* ---- copy / print / theme ---- */
+function copy(text,btn){const o=btn.textContent;const ok=()=>{btn.textContent='copied ✓';setTimeout(()=>btn.textContent=o,1200);};
+  const fb=()=>{try{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.top='-1000px';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}catch(_){btn.textContent='Ctrl+C';}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok).catch(fb);}else{fb();}}
+$('#copyprompt').onclick=e=>copy(buildPrompt(),e.currentTarget);
+$('#copytxprompt').onclick=e=>copy(TX_PROMPT,e.currentTarget);
+function syncPrintMirrors(){document.querySelectorAll('#cards .icard').forEach((d,k)=>{d.querySelector('.printmirror').textContent=(ivs[k]&&ivs[k].tx)||'';});$('#aiPrint').textContent=val('w_airesult');}
+window.addEventListener('beforeprint',syncPrintMirrors);
+$('#pdf').onclick=()=>{if(!val('w_date'))$('#w_date').value=new Date().toLocaleDateString();syncPrintMirrors();window.print();};
+$('#clear').onclick=()=>{if(confirm('Clear the worksheet? Download your PDF first if you need it.')){localStorage.removeItem(KEY);location.reload();}};
+const root=document.documentElement;$('#theme').onclick=()=>{const c=root.getAttribute('data-theme');root.setAttribute('data-theme',c==='dark'?'light':c==='light'?'dark':(matchMedia('(prefers-color-scheme:dark)').matches?'light':'dark'));};
+</script>
+</body></html>
